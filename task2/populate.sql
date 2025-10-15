@@ -9,7 +9,6 @@ USE project;
 DROP TABLE IF EXISTS random_data;
 
 CREATE TABLE random_data (
-    id INT PRIMARY KEY AUTO_INCREMENT,
     id_name VARCHAR(100),
     price INT,
     signup_date DATE,
@@ -32,4 +31,5 @@ CREATE TABLE random_data (
 load data local infile '../pp-2025.csv'
 into table random_data
 fields terminated by ','
+enclosed by '"'
 lines terminated by '\n';
