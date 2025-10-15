@@ -6,9 +6,9 @@ CREATE DATABASE IF NOT EXISTS project DEFAULT CHARACTER SET utf8;
 
 USE project;
 
-DROP TABLE IF EXISTS random_data;
+DROP TABLE IF EXISTS project_data;
 
-CREATE TABLE random_data (
+CREATE TABLE project_data (
     id_name VARCHAR(100),
     price INT,
     signup_date DATE,
@@ -29,7 +29,7 @@ CREATE TABLE random_data (
 
 
 load data local infile '../pp-2025.csv'
-into table random_data
+into table project_data
 fields terminated by ','
 enclosed by '"'
 lines terminated by '\n';
