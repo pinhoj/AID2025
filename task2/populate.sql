@@ -13,9 +13,9 @@ CREATE TABLE project_data (
     price INT,
     signup_date DATE,
     postcode VARCHAR(10),
-    unknown1 VARCHAR(100),
-    unknown2 VARCHAR(100),
-    unknown3 VARCHAR(100),
+    property_type VARCHAR(2),
+    new_build VARCHAR(2),
+    estate_type VARCHAR(2),
     paon VARCHAR(100),
     saon VARCHAR(100),
     street VARCHAR(100),
@@ -23,8 +23,8 @@ CREATE TABLE project_data (
     town VARCHAR(100),
     district VARCHAR(100),
     county VARCHAR(100),
-    unknown4 VARCHAR(100),
-    unknown5 VARCHAR(100)
+    transaction_category VARCHAR(2),
+    unknown_A VARCHAR(2)
 );
 
 
