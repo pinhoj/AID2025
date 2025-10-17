@@ -24,7 +24,7 @@ CREATE TABLE project_data (
     district VARCHAR(100),
     county VARCHAR(100),
     transaction_category VARCHAR(2),
-    unknown_A VARCHAR(2)
+    record_status VARCHAR(2)
 );
 
 
