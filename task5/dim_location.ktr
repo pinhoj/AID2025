@@ -6,6 +6,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -563,24 +564,24 @@
   </connection>
   <order>
     <hop>
-      <from>Unique rows</from>
-      <to>Insert / update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Table input</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Sort rows</from>
-      <to>Unique rows</to>
+      <to>Group by</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by</from>
+      <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>Group by</name>
+    <type>GroupBy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -589,34 +590,54 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>project_dw</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>project_dw</schema>
-      <table>dim_location</table>
-      <key>
-        <name>town</name>
-        <field>CITY</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>CITY</name>
-        <rename>town</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>DISTRICT</name>
-        <rename>district</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COUNTY</name>
-        <rename>county</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>postcode</name>
+      </field>
+      <field>
+        <name>paon</name>
+      </field>
+      <field>
+        <name>saon</name>
+      </field>
+      <field>
+        <name>street</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>county</aggregate>
+        <subject>county</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>district</aggregate>
+        <subject>district</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>locality</aggregate>
+        <subject>locality</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>town</aggregate>
+        <subject>town</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -626,7 +647,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>304</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -651,7 +672,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>county</name>
+        <name>postcode</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -659,7 +680,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>district</name>
+        <name>paon</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -667,7 +688,15 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>town</name>
+        <name>saon</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>street</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -702,7 +731,11 @@
     </partitioning>
     <connection>project</connection>
     <sql>SELECT
-  price
+  postcode
+, paon
+, saon
+, street
+, locality
 , town
 , district
 , county
@@ -716,14 +749,106 @@ FROM project.project_data
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>price</name>
-        <length>9</length>
-        <precision>0</precision>
+        <name>postcode</name>
+        <length>10</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>price</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <comments>postcode</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>paon</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>paon</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>saon</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>saon</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>street</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>street</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>locality</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>locality</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -823,8 +948,8 @@ FROM project.project_data
     </GUI>
   </step>
   <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
+    <name>Table output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -833,22 +958,55 @@ FROM project.project_data
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
+    <connection>project_dw</connection>
+    <schema>project_dw</schema>
+    <table>dim_location</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>town</name>
-        <case_insensitive>N</case_insensitive>
+        <column_name>postcode</column_name>
+        <stream_name>postcode</stream_name>
       </field>
       <field>
-        <name>district</name>
-        <case_insensitive>N</case_insensitive>
+        <column_name>paon</column_name>
+        <stream_name>paon</stream_name>
       </field>
       <field>
-        <name>county</name>
-        <case_insensitive>N</case_insensitive>
+        <column_name>saon</column_name>
+        <stream_name>saon</stream_name>
+      </field>
+      <field>
+        <column_name>street</column_name>
+        <stream_name>street</stream_name>
+      </field>
+      <field>
+        <column_name>county</column_name>
+        <stream_name>county</stream_name>
+      </field>
+      <field>
+        <column_name>district</column_name>
+        <stream_name>district</stream_name>
+      </field>
+      <field>
+        <column_name>locality</column_name>
+        <stream_name>locality</stream_name>
+      </field>
+      <field>
+        <column_name>city</column_name>
+        <stream_name>town</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -860,54 +1018,8 @@ FROM project.project_data
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>432</xloc>
       <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>county</name>
-      </field>
-      <field>
-        <name>district</name>
-      </field>
-      <field>
-        <name>town</name>
-      </field>
-    </group>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
