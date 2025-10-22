@@ -671,8 +671,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>336</yloc>
+      <xloc>544</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -748,8 +748,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>336</yloc>
+      <xloc>1024</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -814,8 +814,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>345</xloc>
-      <yloc>336</yloc>
+      <xloc>416</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1067,8 +1067,8 @@ FROM project.project_data
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>144</yloc>
+      <xloc>48</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1111,8 +1111,8 @@ FROM project.project_data
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>336</yloc>
+      <xloc>288</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1152,8 +1152,8 @@ FROM project.project_data
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>240</yloc>
+      <xloc>176</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1405,8 +1405,8 @@ FROM project_dw.dim_location
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>448</yloc>
+      <xloc>544</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1459,8 +1459,8 @@ FROM project_dw.dim_location
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>336</yloc>
+      <xloc>704</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1494,8 +1494,8 @@ FROM project_dw.dim_location
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>336</yloc>
+      <xloc>848</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
