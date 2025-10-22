@@ -670,7 +670,7 @@
     <delimiter>	</delimiter>
     <enclosure>"</enclosure>
     <escape_char>\</escape_char>
-    <replace>N</replace>
+    <replace>Y</replace>
     <ignore>N</ignore>
     <local>N</local>
     <fifo_file_name>/var/lib/mysql-files/tmp/fifo</fifo_file_name>

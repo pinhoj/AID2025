@@ -649,7 +649,7 @@
     </partitioning>
     <formula>
       <field_name>time_id</field_name>
-      <formula_string>DATEVALUE("2000-01-01" + [valuename])</formula_string>
+      <formula_string>DATEVALUE("2020-01-01" + [valuename])</formula_string>
       <value_type>Timestamp</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
@@ -694,7 +694,7 @@
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-    <limit>15000</limit>
+    <limit>5000</limit>
     <never_ending>N</never_ending>
     <interval_in_ms>5000</interval_in_ms>
     <row_time_field>now</row_time_field>
