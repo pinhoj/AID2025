@@ -1,42 +1,42 @@
 <Schema name="project_dw">
-  <Cube name="transactions" visible="true" cache="true" enabled="true">
+  <Cube name="Transactions" visible="true" cache="true" enabled="true">
     <Table name="fact_table">
     </Table>
-    <Dimension type="StandardDimension" visible="true" foreignKey="LOCATION_ID" highCardinality="false" name="location">
-      <Hierarchy name="location_hierarchy" visible="true" hasAll="true" allMemberName="All Locations" primaryKey="LOCATION_ID">
+    <Dimension type="StandardDimension" visible="true" foreignKey="LOCATION_ID" highCardinality="false" name="Location">
+      <Hierarchy name="Location Hierarchy" visible="true" hasAll="true" allMemberName="All Locations" primaryKey="LOCATION_ID">
         <Table name="dim_location">
         </Table>
-        <Level name="county" visible="true" column="COUNTY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="County" visible="true" column="COUNTY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="district" visible="true" column="DISTRICT" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="District" visible="true" column="DISTRICT" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="city" visible="true" column="CITY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="City" visible="true" column="CITY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="locality" visible="true" column="LOCALITY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="Locality" visible="true" column="LOCALITY" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="postcode" visible="true" column="POSTCODE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="Postcode" visible="true" column="POSTCODE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="street" visible="true" column="STREET" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="Street" visible="true" column="STREET" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="paon" visible="true" column="PAON" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="Paon" visible="true" column="PAON" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="saon" visible="true" column="SAON" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Level name="Saon" visible="true" column="SAON" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="TimeDimension" visible="true" foreignKey="TIME_ID" highCardinality="false" name="time">
-      <Hierarchy name="time_hierarchy" visible="true" hasAll="true" allMemberName="All Years" primaryKey="TIME_ID">
+    <Dimension type="TimeDimension" visible="true" foreignKey="TIME_ID" highCardinality="false" name="Time">
+      <Hierarchy name="Time Hierarchy" visible="true" hasAll="true" allMemberName="All Years" primaryKey="TIME_ID">
         <Table name="dim_time">
         </Table>
-        <Level name="year" visible="true" column="YEAR_ID" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        <Level name="Year" visible="true" column="YEAR_ID" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
         </Level>
-        <Level name="month" visible="true" column="MONTH_ID" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        <Level name="Month" visible="true" column="MONTH_ID" ordinalColumn="MONTH_NUM" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
         </Level>
-        <Level name="day" visible="true" column="DAY_ID" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        <Level name="Day" visible="true" column="DAY_ID" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Measure name="price" column="PRICE" datatype="Numeric" formatString="&#163;#,###.00" aggregator="sum" visible="true">
+    <Measure name="Price" column="PRICE" datatype="Numeric" formatString="&#163;#,###.00" aggregator="sum" visible="true">
     </Measure>
   </Cube>
 </Schema>

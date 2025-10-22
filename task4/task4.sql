@@ -25,6 +25,7 @@ CREATE TABLE dim_location (
 CREATE TABLE dim_time (
     TIME_ID DATE PRIMARY KEY,
     YEAR_ID INT,
+    MONTH_NUM INT,
     MONTH_ID VARCHAR(40),
     DAY_ID INT
 );

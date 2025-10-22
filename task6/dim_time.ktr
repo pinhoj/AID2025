@@ -758,7 +758,7 @@
     <connection>project_dw</connection>
     <schema>project_dw</schema>
     <table>dim_time</table>
-    <commit>15000</commit>
+    <commit>100</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -788,6 +788,10 @@
       <field>
         <column_name>month_id</column_name>
         <stream_name>month_id</stream_name>
+      </field>
+      <field>
+        <column_name>MONTH_NUM</column_name>
+        <stream_name>month_num</stream_name>
       </field>
     </fields>
     <attributes/>
