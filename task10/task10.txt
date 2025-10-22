@@ -1,5 +1,5 @@
 SELECT
-NON EMPTY Measures.Price ON COLUMNS,
-NON EMPTY Filter(Location.County.Members, (Measures.Price > 1000000000)) ON ROWS
+	NON EMPTY Measures.Price ON COLUMNS,
+	NON EMPTY Filter(Location.County.Members, (Measures.Price > 1000000000)) ON ROWS
 FROM Transactions
 WHERE Time.Year.[2025]
